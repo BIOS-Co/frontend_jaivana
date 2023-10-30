@@ -459,3 +459,25 @@
   [hidden] {
     display: none;
   }
+
+  /*fuentes*/
+
+  @font-face {
+    font-family: 'Bold';
+    src: url('./fonts/Manrope-Bold.ttf') format('ttf'),
+         url('./fonts/Manrope-ExtraBold.ttf') format('ttf'),
+         url('./fonts/Manrope-ExtraLight.ttf') format('ttf'),
+         url('./fonts/Manrope-Light.ttf') format('ttf'),
+         url('./fonts/Manrope-Medium.ttf') format('ttf'),
+         url('./fonts/Manrope-Regular.ttf') format('ttf'),
+         url('./fonts/Manrope-SemiBold.ttf') format('ttf');
+    /* Puedes incluir diferentes formatos de archivo para garantizar la compatibilidad con varios navegadores */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+  .font {
+    font-family: 'Bold', sans-serif;
+    /* Utiliza la fuente personalizada y, si no está disponible, usa una fuente genérica como respaldo */
+  }
