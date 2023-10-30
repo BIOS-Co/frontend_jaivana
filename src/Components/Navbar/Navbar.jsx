@@ -9,7 +9,7 @@ export default function Navigationbar() {
   return (
     <Navbar expand="lg" id='nav_bar' className="bg-body-tertiary" style={{position:'absolute','width':'100%',opacity:0.6}}>
       <Container>
-        <Navbar.Brand style={{cursor:'default'}} className='titleNav' href="#/Lobby">JAIVANÁ - SUMATEC</Navbar.Brand>
+        <Navbar.Brand style={{cursor:'pointer'}} className='titleNav' href="#/Lobby">JAIVANÁ - SUMATEC</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" style={{display:'flex',alignItems:'center',justifyContent:'center','width':'300px'}}>

@@ -311,7 +311,7 @@ export default function Products() {
                       </th>
                       <th scope="col" className='th-width-sm-'>
                         <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Nombre</span>
+                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Código</span>
                         </div>
                       </th>
                     </tr>

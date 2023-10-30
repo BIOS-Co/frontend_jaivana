@@ -254,12 +254,12 @@ export default function Price() {
           <div style={{marginBottom:'100px'}} className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
-                      <Select options={[{value:"Precio de un producto",label:"Precio de un producto"},{value:"Precios de todos los productos",label:"Precios de todos los productos"}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                      <Select options={[{value:"Precio de un producto",label:"Precio de un producto"},{value:"Precios de todos los productos",label:"Precios de todos los productos"}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Qué desea Calcular?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
-                    <Select options={[{value:"Iterar por Historial Proveedor ",label:"Iterar por Historial Proveedor "},{value:"Iterar por Historial Producto/Familia",label:"Iterar por Historial Producto/Familia"}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                    <Select options={[{value:"Iterar por Historial Proveedor ",label:"Iterar por Historial Proveedor "},{value:"Iterar por Historial Producto/Familia",label:"Iterar por Historial Producto/Familia"}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Cómo Desea Iterar?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
           </div>
@@ -483,12 +483,45 @@ export default function Price() {
                   </thead>
                   <tbody>
 
-                    <tr>
+                  <tr>
                       <td className='align-middle'>
                         <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
                       </td>
                       <td className='align-middle'>
                         <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
                       </td>
                     </tr>
                     <tr>
@@ -498,13 +531,38 @@ export default function Price() {
                       <td className='align-middle'>
                         <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
                       </td>
-                    </tr>
-                    <tr>
                       <td className='align-middle'>
                         <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
                       </td>
                       <td className='align-middle'>
                         <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
+                      </td>
+                      <td className='align-middle'>
+                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
                       </td>
                     </tr>
                   </tbody>
