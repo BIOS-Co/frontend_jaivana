@@ -7,8 +7,11 @@ import Imagen_3 from '../../img/Fondo_3.jpg';
 
 import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
+import Swal from 'sweetalert2';
+
 
 const { NoOptionsMessage } = components;
+
 
 const customNoOptionsMessage = props => (
   <NoOptionsMessage {...props} className="custom-no-options-message-auth-form-">No registrado</NoOptionsMessage>
@@ -243,6 +246,121 @@ const selectStyles = {
 }
 
 export default function Products() {
+
+  /* USE STATES */
+  
+  let [data,setData] = React.useState({
+    'Nit':"",
+    'Departamento':"",
+    'Ciuu':"",
+    'client_section':"",
+    'products':[]
+  })
+
+  /* input */
+
+  const readInput=(event,type)=>{
+
+    setData({...data,[type]:event.target.value})
+
+  }
+
+  const readSelect=(event,type)=>{
+
+    if(event){
+
+      setData({...data,[type]:event.value})
+
+    }else{
+
+      setData({...data,[type]:""})
+
+    }
+
+    
+
+  }
+
+  const AppendProduct=()=>{
+
+    if(data?.products.length===16){
+
+      Swal.fire({
+          icon: 'info',
+          text:"No puedes agregar más de 16 productos",
+      })
+
+
+
+    }else{
+
+      let list = data.products
+      list.push({'code':""})
+      setData({...data,['products']:list})
+    }
+
+
+  }
+
+
+  const deleteProduct=(ind)=>{
+
+    let list = data.products.filter((obj,index)=>index !== ind)
+
+    setData({...data,['products']:list});
+
+  }
+
+  const checkProducts=()=>{
+    let filterArray = data.products.filter((obj)=>obj.code === "");
+    if(filterArray.length !== 0){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  const ReadInputTable=(event,index)=>{
+    let List = data.products;
+
+    List[index].code = event.target.value;
+    
+    setData({...data,['products']:List})
+  }
+
+  let [inferencia,setInferencia] = React.useState(null);
+
+  const doInference=async()=>{
+
+    /* INFERENCIA */
+
+    let check = checkProducts();
+
+    if(check){
+
+      Swal.fire({
+        icon: 'info',
+        text:"Rellena el código del producto",
+      })
+
+    }else{
+
+      if(data.Nit === "" || data.Ciuu === "" || data.Departamento === "" || data.client_section ===""){
+        Swal.fire({
+          icon: 'info',
+          text:"Faltan campos por completar",
+        })
+      }else{
+        // LLAMAMOS EL SERVICIO AQUI.
+        setInferencia({'data':'nice'})
+      }
+
+    }
+
+  }
+
+
+
   return (
     <div className='body_'>
       <Navigationbar></Navigationbar>
@@ -255,13 +373,15 @@ export default function Products() {
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' value={data.Nit} onChange={(event)=>readInput(event,'Nit')}/>
                             <label className='fs-5- ff-monse-regular-'>Nit del cliente</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" 
+                            name='identification'
+                            value={data.Departamento} onChange={(event)=>readInput(event,'Departamento')} />
                             <label className='fs-5- ff-monse-regular-'>Departamento</label>
                           </div>
               </div>
@@ -269,38 +389,31 @@ export default function Products() {
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification'
+                            value={data.Ciuu} onChange={(event)=>readInput(event,'Ciuu')} />
                             <label className='fs-5- ff-monse-regular-'>Ciuu del cliente</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' 
+                            value={data.client_section} onChange={(event)=>readInput(event,'client_section')}
+                            />
                             <label className='fs-5- ff-monse-regular-'>Sección económica del cliente</label>
                           </div>
               </div>
           </div>
-          {/* <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                    <div className='form-floating inner-addon- left-addon-'>
-                      <Select options={[]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true} name='typeIdentification'/>
-                    </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                    <div className='form-floating inner-addon- left-addon-'>
-                    <Select options={[]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="Tipo de identificación" styles={selectStyles} isClearable={true} name='typeIdentification'/>
-                    </div>
-              </div>
-          </div> */}
           <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
                 <div className='col-auto'>
-                    <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
+                    <button 
+                    onClick={AppendProduct} className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
                       <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>+ Producto</span>
                     </button>
                 </div>
           </div>
-
-          <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
+          {data?.products?.length !== 0 ? 
+          
+            <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>
                     <tr>
@@ -317,47 +430,45 @@ export default function Products() {
                     </tr>
                   </thead>
                   <tbody>
+                    {data?.products.map((obj,index)=>{
 
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='delete m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' style={{cursor:'pointer'}}>X</p>
+                      return(
+                      <tr key={index}>
+                      <td 
+                      className='align-middle'>
+                        <p onClick={()=>deleteProduct(index)} className='delete m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' style={{cursor:'pointer'}}>X</p>
                       </td>
                       <td className='align-middle'>
                         <div id='internal-form' className='w-100'>
-                          <input type="text" className='form-control p-0 text-center input-large-' placeholder='Campo editable'/>
+                          <input value={data?.products[index].code}
+                          onChange={(event)=>ReadInputTable(event,index)} type="text" className='form-control p-0 text-center input-large-' placeholder='Campo editable'/>
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='delete m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' style={{cursor:'pointer'}}>X</p>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <input type="text" className='form-control p-0 text-center input-large-' placeholder='Campo editable'/>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='delete m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' style={{cursor:'pointer'}}>X</p>
-                      </td>
-                      <td className='align-middle'>
-                        <div id='internal-form' className='w-100'>
-                          <input type="text" className='form-control p-0 text-center input-large-' placeholder='Campo editable'/>
-                        </div>
-                      </td>
-                    </tr>
+                      )
+
+                    })}
+                    
                   </tbody>
                 </table>
           </div>
+          :
+          <></>
+          } 
+
           <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
                 <div className='col-auto'>
-                    <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
+                    <button  
+                    onClick={doInference} className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
                       <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>Inferencia</span>
                     </button>
                 </div>
           </div>
+          
+          {inferencia !== null ? 
+          <>
+
+          
           <p className='font description_' style={{marginTop:'20px'}}>Recomendación de prepedido</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
@@ -457,6 +568,16 @@ export default function Products() {
                     </button>
                 </div>
           </div>
+
+          </>
+            
+          :
+          <></>
+          
+          
+          
+          }
+          
         </form>
       </div>
     </div>
