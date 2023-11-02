@@ -349,10 +349,10 @@ export default function Products() {
 
     }else{
 
-      if(data.Nit === "" || data.Ciuu === "" || data.Departamento === "" || data.client_section ===""){
+      if(data.Nit === ""){
         Swal.fire({
           icon: 'info',
-          text:"Faltan campos por completar",
+          text:"Debe registrar el campo del nit",
         })
       }else{
         // LLAMAMOS EL SERVICIO AQUI.

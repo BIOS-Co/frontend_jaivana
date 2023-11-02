@@ -10,7 +10,7 @@ export default function Navigationbar() {
     <Navbar expand="lg" id='nav_bar' className="bg-body-tertiary" style={{position:'absolute','width':'100%',opacity:0.6}}>
       <Container>
         <Navbar.Brand style={{cursor:'pointer'}} className='titleNav' href="#/Lobby">JAIVANÁ - SUMATEC</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" style={{display:'flex',alignItems:'center',justifyContent:'center','width':'300px'}}>
             <NavDropdown style={{width:'300px !important'}} className='font_' title="Paginas" id="basic-nav-dropdown">
@@ -19,7 +19,7 @@ export default function Navigationbar() {
               <NavDropdown.Item className='font_' href="https://www.bios.co/">Bios co.</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
       </Container>
     </Navbar>
   )

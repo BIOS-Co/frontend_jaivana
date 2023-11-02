@@ -2,6 +2,8 @@ import React from 'react'
 import './Price.css'
 import Navigationbar from '../../Components/Navbar/Navbar'
 import Imagen_3 from '../../img/Fondo_2.jpg';
+import Swal from 'sweetalert2';
+import Preloader from '../../Components/Loading/Loading';
 /* FORM */
 
 import Select, { components } from 'react-select';
@@ -242,8 +244,117 @@ const selectStyles = {
 }
 
 export default function Price() {
+
+  /* USE STATES */
+  
+  let [data,setData] = React.useState({
+    'calculate':"",
+    'iterate':"",
+    'pareto':"",
+  })
+
+  let [data_1,setData_1] = React.useState({
+    'code':'',
+    'descuento':'',
+    'nit':'',
+    'umbral':''
+  })
+
+  let [data_2,setData_2] = React.useState({
+    'code_group':'',
+    'code_Subgroup':'',
+    'descuento':'',
+    'nit':'',
+    'umbral':''
+  })
+
+  
+  /* input */
+
+  const readInput_1=(event,type)=>{
+
+    setData_1({...data_1,[type]:event.target.value})
+
+  }
+
+  const readInput_2=(event,type)=>{
+
+    setData_2({...data_2,[type]:event.target.value})
+
+  }
+
+  const readSelect=(event,type)=>{
+
+    if(event){
+
+      setData({...data,[type]:event.value})
+
+    }else{
+
+      setData({...data,[type]:""})
+
+    }
+
+    
+
+  }
+
+  let [preloader,setPreloader] = React.useState(false);
+  let [inferencia,setInferencia] =React.useState(null);
+
+  const doInference=async()=>{
+
+    if(data.calculate === 'Precio de un producto'){
+
+       if(data_1.code === "" || data_1.nit === "" || data_1.umbral === ""){
+
+        Swal.fire({
+          icon: 'info',
+          text:"Los campos de código , nit y umbral son obligatorios.",
+         })
+
+       }else{
+
+        setInferencia({'data':'nice'})
+        setPreloader(true);
+        setTimeout(()=>{
+            setPreloader(false);
+        },1800)
+
+       }
+
+    }else{
+
+      if(data_2.code_group === "" || data_2.code_Subgroup === "" || data_2.umbral === "" || data_2.nit === ""){
+
+        Swal.fire({
+          icon: 'info',
+          text:"Solo el campo de descuento no es obligatorio.",
+         })
+
+       }else{
+
+        setInferencia({'data':'nice'})
+        setPreloader(true);
+        setTimeout(()=>{
+            setPreloader(false);
+        },1800)
+
+       }
+      
+    }
+
+  }
+
   return (
     <div className='body_'>
+      {
+          preloader ?
+          <Preloader type={'spokes'}/>
+          :
+
+          <></>
+      }
       <Navigationbar></Navigationbar>
       <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover'}}>
           <p className='font title ' id='dropdown-basic' style={{color:'white'}}>Precios</p>
@@ -251,110 +362,118 @@ export default function Price() {
       <div className='FormularioBody font'>
         <p className='font description_'>Registra el siguiente formulario para realizar la inferencia</p>
         <form className='formulario'>
-          <div style={{marginBottom:'100px'}} className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
-                      <Select options={[{value:"Precio de un producto",label:"Precio de un producto"},{value:"Precios de todos los productos",label:"Precios de todos los productos"}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Qué desea Calcular?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                      <Select options={[{value:"Precio de un producto",label:"Precio de un producto"},{value:"Precios de todos los productos",label:"Precios de todos los productos"}]} value={{value:data?.calculate,label:data?.calculate}} onChange={(event)=>readSelect(event,'calculate')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Qué desea Calcular?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
-                    <Select options={[{value:"Iterar por Historial Proveedor ",label:"Iterar por Historial Proveedor "},{value:"Iterar por Historial Producto/Familia",label:"Iterar por Historial Producto/Familia"}]} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Cómo Desea Iterar?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                    <Select options={[{value:"Iterar por Historial Proveedor ",label:"Iterar por Historial Proveedor "},{value:"Iterar por Historial Producto/Familia",label:"Iterar por Historial Producto/Familia"}]} value={{value:data?.iterate,label:data?.iterate}} onChange={(event)=>readSelect(event,'iterate')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Cómo Desea Iterar?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
           </div>
+          <div style={{marginBottom:'100px'}} className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                    <div className='form-floating inner-addon- left-addon-'>
+                      <Select options={[{value:"Pareto",label:"Pareto"},{value:"No pareto",label:"No pareto"}]} value={{value:data?.pareto,label:data?.pareto}} onChange={(event)=>readSelect(event,'pareto')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Producto pareto?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                    </div>
+              </div>
+          </div>
+
+          {data?.calculate !== "" && data?.iterate !== "" && data?.pareto !== "" ? 
+          <>
+          {data?.calculate==='Precio de un producto' ? 
+          <>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input value={data_1?.code} onChange={(event)=>readInput_1(event,'code')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
                             <label className='fs-5- ff-monse-regular-'>Codigo tornillo</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input value={data_1?.umbral} onChange={(event)=>readInput_1(event,'umbral')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label className='fs-5- ff-monse-regular-'>Umbral Máximo de iteracciones por fecha</label>
+                          </div>
+              </div>
+              
+          </div>
+
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_1?.nit} onChange={(event)=>readInput_1(event,'nit')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label className='fs-5- ff-monse-regular-'>Nit proveedor</label>
+                          </div>
+              </div>
+              
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_1?.descuento} onChange={(event)=>readInput_1(event,'descuento')}  type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
                             <label className='fs-5- ff-monse-regular-'>Descuento</label>
                           </div>
               </div>
           </div>
-
+          </>
+          :
+          <>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Nit proveedor</label>
-                          </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                          <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Umbral Máximo de iteracciones por Fecha</label>
-                          </div>
-              </div>
-          </div>
-
-          <div style={{marginBottom:'40px'}} className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                          <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Producto pareto</label>
-                          </div>
-              </div>
-          </div>
-
-
-          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                          <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input value={data_2?.code_group} onChange={(event)=>readInput_2(event,'code_group')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
                             <label className='fs-5- ff-monse-regular-'>Código grupo</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input value={data_2?.code_Subgroup} onChange={(event)=>readInput_2(event,'code_Subgroup')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
                             <label className='fs-5- ff-monse-regular-'>Código subgrupo</label>
                           </div>
               </div>
           </div>
 
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+          <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Descuento</label>
+                            <input value={data_2?.umbral} onChange={(event)=>readInput_2(event,'umbral')}  type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label className='fs-5- ff-monse-regular-'>Umbral máximo de iteracciones por fecha</label>
                           </div>
               </div>
+              
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <input value={data_2?.nit} onChange={(event)=>readInput_2(event,'nit')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
                             <label className='fs-5- ff-monse-regular-'>Nit proveedor</label>
                           </div>
               </div>
           </div>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+          <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Umbral máximo de iteracciones por fecha</label>
-                          </div>
-              </div>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                          <div className='form-floating inner-addon- left-addon-'>
-                            <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Producto pareto</label>
+                            <input value={data_2?.descuento} onChange={(event)=>readInput_2(event,'descuento')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label className='fs-5- ff-monse-regular-'>Descuento</label>
                           </div>
               </div>
           </div>
+          </>
+          }
+          
+
+
+          
           
           <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
                 <div className='col-auto'>
-                    <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
+                    <button onClick={doInference}  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
                       <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>+ Inferencia</span>
                     </button>
                 </div>
           </div>
-
+          {inferencia !== null  ? 
+          <>
           <p className='font description_' style={{marginTop:'20px'}}>Precio de un Producto</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
@@ -575,6 +694,16 @@ export default function Price() {
                     </button>
                 </div>
           </div>
+          </>
+          :
+          <></>
+          }
+          
+          </>
+          :
+          <></>
+          }
+          
         </form>
       </div>
     </div>
