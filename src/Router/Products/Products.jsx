@@ -8,7 +8,7 @@ import Imagen_3 from '../../img/Fondo_3.jpg';
 import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Swal from 'sweetalert2';
-
+import Preloader from '../../Components/Loading/Loading';
 
 const { NoOptionsMessage } = components;
 
@@ -247,6 +247,10 @@ const selectStyles = {
 
 export default function Products() {
 
+  /* PRELOADER */
+
+  let [preloader,setPreloader]  = React.useState(false);
+
   /* USE STATES */
   
   let [data,setData] = React.useState({
@@ -353,6 +357,10 @@ export default function Products() {
       }else{
         // LLAMAMOS EL SERVICIO AQUI.
         setInferencia({'data':'nice'})
+        setPreloader(true);
+        setTimeout(()=>{
+            setPreloader(false);
+        },1800)
       }
 
     }
@@ -363,6 +371,13 @@ export default function Products() {
 
   return (
     <div className='body_'>
+      {
+          preloader ?
+          <Preloader type={'spokes'}/>
+          :
+
+          <></>
+      }
       <Navigationbar></Navigationbar>
       <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover'}}>
           <p className='font title ' id='dropdown-basic' style={{color:'white'}}>Recomendación de productos</p>
