@@ -25,10 +25,10 @@
     --color-secondary-burgundy-: #3c8bda;
     --color-purple-: #3c8bda;
     --color-secondary-purple-: #3c8bda;
-    --color-tertiary-purple-: #9D91F4;
-    --color-quaternary-purple-: #777096;
-    --color-quinary-purple-: #5C74FF;
-    --color-pink-: #E354A6;
+    --color-tertiary-purple-: #0b1a1a;
+    --color-quaternary-purple-: #251d49;
+    --color-quinary-purple-: #234145;
+    --color-pink-: #54cbe3;
     --color-red-: #F96767;
     --color-secondary-red-: #F86E6E;
     --color-yellow-: #F19420;
@@ -40,10 +40,10 @@
     --color-quaternary-green-: #6CDA84;
     --color-quinary-green-: #A3D338;
     --color-aquamarine-: #54E3E3;
-    --color-blue-: #4F29F0;
+    --color-blue-: #296ff0;
     --color-secondary-blue-: #0496FF;
     --color-tertiary-blue-: #090131;
-    --color-quaternary-blue-: #2822D3;
+    --color-quaternary-blue-: #2275d3;
     --color-sectary-blue-: #1B8BC7;
     --color-primary-brown-: #86464E;
     --color-secondary-brown-: #544C47;
@@ -2036,7 +2036,7 @@ input[type=number]::-webkit-outer-spin-button {
     position: absolute;
     top: 10px !important;
     z-index: 1000;
-    background-color: var(--color-secondary-white-rgba-) !important;
+    background-color: white !important;
     background-clip: padding-box;
     border: 0px solid var(--color-black-rgba-) !important;
     border-radius: 1rem !important;
@@ -2080,7 +2080,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
   
   .dropdown-item:hover {
-    color: var(--color-white-) !important;
+    color: white !important;
     background-color: var(--color-purple-) !important;
   }
   

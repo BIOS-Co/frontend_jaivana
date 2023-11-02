@@ -108,7 +108,7 @@ const selectStyles = {
   menu: (styles) => ({
     ...styles,
     border: 'none',
-    backgroundColor: 'var(--color-gray-rgba-)',
+    backgroundColor: 'white',
     boxShadow: 'var(--box-shadow-6-)',
     borderRadius: '0.8rem',
     padding: 0,
@@ -151,7 +151,7 @@ const selectStyles = {
     ...provided,
     fontSize: 11,
     textTransform: "uppercase",
-    backgroundColor: state.isSelected ? "var(--color-purple-)" : "var(--color-gray-rgba-)",
+    backgroundColor: state.isSelected ? "var(--color-purple-)" : "white",
     fontFamily: 'var(--font-family-regular-)',
     padding: '0.5rem 0.8rem 0.5rem 0.8rem',
     borderRadius: '0.8rem',
