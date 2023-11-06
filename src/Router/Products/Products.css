@@ -6,7 +6,7 @@
 .carouselBody_{
 
     width: 100%;
-    min-height:500px ;
+    min-height:700px ;
     height:50vh;
     display: flex;
     align-items: center;
@@ -14,6 +14,8 @@
     flex-direction: column;
 
 }
+
+
 
 .FormularioBody{
     width: 100%;
@@ -26,7 +28,7 @@
 }
 .description_{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-align: center;
     cursor: default;
     color:rgb(142, 140, 140);
@@ -41,17 +43,69 @@
 }
 
 .buttonProduct{
-    border: 1px solid !important;
-    padding: 10px !important;
-    transition: all 1s;
-
+    background: linear-gradient(to bottom, #1b6ab3     ,  #3497f9 );
+    border: none !important;
+    border-radius: 30px;
+    transition: all 0.3s !important;
+    color: white !important;
+    width: 195px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) !important;
+    transition: background 0.3s ease !important; /* Establece la transición en la propiedad background durante 0.3 segundos con una función de temporización 'ease' */
 }
+.icon-scroll,
+.icon-scroll:before {
+  position: absolute;
+}
+
+.icon-scroll {
+  z-index: 5;
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  border-radius: 1rem;
+  -khtml-border-radius: 1rem;
+  margin-bottom: 3rem !important;
+}
+
+.icon-scroll:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  margin-left: 8px;
+  top: 8px;
+  border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  -moz-border-radius: 6rem;
+  border-radius: 6rem;
+  -khtml-border-radius: 6rem;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: scroll
+}
+@keyframes scroll {
+    0% {
+      opacity: 1
+    }
+  
+    100% {
+      opacity: 0;
+      transform: translateY(26px)
+    }
+  }
 .buttonProduct:hover{
    
-    opacity: 0.6;
+    opacity: 1;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(to bottom,   #1b6ab3     ,  #022240 );
+    
 }
 
 .delete:hover{
    color: red;
 }
+
+

@@ -33,7 +33,7 @@
 }
 
 .title{
-    font-size: 3rem;
+    font-size: 3rem !important;
     text-align: center;
     font-family: 'Bold', sans-serif;
     font-weight: 600 !important;
@@ -110,25 +110,28 @@
     font-size: 1rem;
     padding: 10px;
     text-align: center;
-    font-weight: 900;
+    font-weight: 600;
     width: 70%;
-    background-color: #04203a;
+    background: linear-gradient(to bottom, #04417a     ,  #3497f9 );
     border: none;
     border-radius: 30px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    transition: all 2s !important;
+    /* box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.25); */
   }
 
   .textCard:hover{
-    background-color: #063968;
+    transition: all 2s !important;
+    background: linear-gradient(to bottom,   #042b64     ,  #04417a );
     font-family: 'Bold', sans-serif;
     font-size: 1rem;
     padding: 10px;
     text-align: center;
-    font-weight: 900;
+    font-weight: 600;
     width: 70%;
     border: none;
     border-radius: 50px;
   }
+  
 
   /*media queries*/
 /* tablet screens */

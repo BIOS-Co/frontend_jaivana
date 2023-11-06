@@ -33,6 +33,51 @@
     margin-bottom: 80px;
 }
 
+.icon-scroll,
+.icon-scroll:before {
+  position: absolute;
+}
+
+.icon-scroll {
+  z-index: 5;
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  border-radius: 1rem;
+  -khtml-border-radius: 1rem;
+  margin-bottom: 3rem !important;
+}
+
+.icon-scroll:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  margin-left: 8px;
+  top: 8px;
+  border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  -moz-border-radius: 6rem;
+  border-radius: 6rem;
+  -khtml-border-radius: 6rem;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: scroll
+}
+@keyframes scroll {
+    0% {
+      opacity: 1
+    }
+  
+    100% {
+      opacity: 0;
+      transform: translateY(26px)
+    }
+  }
+
 .formulario{
     min-width: 300px;
     width: 70%;
@@ -48,8 +93,8 @@
 }
 .buttonProduct:hover{
    
-    opacity: 0.6;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(to bottom,   #042b64     ,  #04417a );
 }
 
 .delete:hover{

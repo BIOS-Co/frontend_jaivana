@@ -99,7 +99,7 @@ const selectStyles = {
   */
   input: (provided) => ({
   ...provided,
-  color: 'var(--color-purple-)',
+  color: '#d2d5d8',
   fontSize: 12,
   textTransform: 'uppercase',
   fontFamily: 'var(--font-family-regular-)',
@@ -153,7 +153,7 @@ const selectStyles = {
     ...provided,
     fontSize: 11,
     textTransform: "uppercase",
-    backgroundColor: state.isSelected ? "var(--color-purple-)" : "white",
+    backgroundColor: state.isSelected ? "#d2d5d8" : "white",
     fontFamily: 'var(--font-family-regular-)',
     padding: '0.5rem 0.8rem 0.5rem 0.8rem',
     borderRadius: '0.8rem',
@@ -188,7 +188,7 @@ const selectStyles = {
     top: state.hasValue || state.selectProps.inputValue ? -20 : "22%",
     left: state.hasValue || state.selectProps.inputValue ? -32 : "0%",
     transition: "top 0.1s, font-size 0.1s",
-    color: 'var(--color-purple-)',
+    color: 'gray',
     fontSize: state.hasValue || state.selectProps.inputValue ? 13 : "14px",
     lineHeight: 1.25,
     fontFamily: 'var(--font-family-regular-)',
@@ -204,7 +204,7 @@ const selectStyles = {
     ...styles, 
     fontSize: 12,
     textTransform: 'uppercase',
-    color: "var(--color-purple-)", 
+    color: "black", 
     fontFamily: 'var(--font-family-regular-)', 
     paddingTop: '0.3rem',
     marginLeft: 0,
@@ -356,8 +356,9 @@ export default function Price() {
           <></>
       }
       <Navigationbar></Navigationbar>
-      <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover'}}>
-          <p className='font title ' id='dropdown-basic' style={{color:'white'}}>Precios</p>
+      <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover','display':'flex','flexDirection':'column'}}>
+          <p className='font title ' style={{color:'white'}}>Sistema de fijación de precios</p>
+          <div class="icon-scroll" style={{position:'relative'}}></div>
       </div>
       <div className='FormularioBody font'>
         <p className='font description_'>Registra el siguiente formulario para realizar la inferencia</p>
@@ -390,13 +391,13 @@ export default function Price() {
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_1?.code} onChange={(event)=>readInput_1(event,'code')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Codigo del producto</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Codigo del producto</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_1?.umbral} onChange={(event)=>readInput_1(event,'umbral')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Umbral Máximo de iteracciones por fecha</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Umbral Máximo de iteracciones por fecha</label>
                           </div>
               </div>
               
@@ -406,14 +407,14 @@ export default function Price() {
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_1?.nit} onChange={(event)=>readInput_1(event,'nit')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Nit proveedor</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Nit proveedor</label>
                           </div>
               </div>
               
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_1?.descuento} onChange={(event)=>readInput_1(event,'descuento')}  type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Descuento</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento</label>
                           </div>
               </div>
           </div>
@@ -424,13 +425,13 @@ export default function Price() {
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_2?.code_group} onChange={(event)=>readInput_2(event,'code_group')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Código grupo</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Código grupo</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_2?.code_Subgroup} onChange={(event)=>readInput_2(event,'code_Subgroup')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Código subgrupo</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Código subgrupo</label>
                           </div>
               </div>
           </div>
@@ -439,14 +440,14 @@ export default function Price() {
           <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_2?.umbral} onChange={(event)=>readInput_2(event,'umbral')}  type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Umbral máximo de iteracciones por fecha</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Umbral máximo de iteracciones por fecha</label>
                           </div>
               </div>
               
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_2?.nit} onChange={(event)=>readInput_2(event,'nit')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Nit proveedor</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Nit proveedor</label>
                           </div>
               </div>
           </div>
@@ -454,7 +455,7 @@ export default function Price() {
           <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_2?.descuento} onChange={(event)=>readInput_2(event,'descuento')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Descuento</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento</label>
                           </div>
               </div>
           </div>

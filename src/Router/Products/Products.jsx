@@ -379,9 +379,13 @@ export default function Products() {
           <></>
       }
       <Navigationbar></Navigationbar>
-      <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover'}}>
-          <p className='font title ' id='dropdown-basic' style={{color:'white'}}>Recomendación de productos</p>
+      
+      <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover','display':'flex','flexDirection':'column'}}>
+         
+          <p className='font title width-title'  style={{color:'white'}}>Sistema de recomendación de productos</p>
+          <div class="icon-scroll" style={{position:'relative'}}></div>
       </div>
+      
       <div className='FormularioBody font'>
         <p className='font description_'>Registra el siguiente formulario para realizar la inferencia</p>
         <form className='formulario'>
@@ -389,7 +393,7 @@ export default function Products() {
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' value={data.Nit} onChange={(event)=>readInput(event,'Nit')}/>
-                            <label className='fs-5- ff-monse-regular-'>Nit del cliente</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Nit del cliente</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
@@ -397,7 +401,7 @@ export default function Products() {
                             <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" 
                             name='identification'
                             value={data.Departamento} onChange={(event)=>readInput(event,'Departamento')} />
-                            <label className='fs-5- ff-monse-regular-'>Departamento</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Departamento</label>
                           </div>
               </div>
           </div>
@@ -406,15 +410,15 @@ export default function Products() {
                           <div className='form-floating inner-addon- left-addon-'>
                             <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification'
                             value={data.Ciuu} onChange={(event)=>readInput(event,'Ciuu')} />
-                            <label className='fs-5- ff-monse-regular-'>Ciuu del cliente</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Ciuu del cliente</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' 
-                            value={data.client_section} onChange={(event)=>readInput(event,'client_section')}
+                              value={data.client_section} onChange={(event)=>readInput(event,'client_section')}
                             />
-                            <label className='fs-5- ff-monse-regular-'>Sección económica del cliente</label>
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Sección económica del cliente</label>
                           </div>
               </div>
           </div>
