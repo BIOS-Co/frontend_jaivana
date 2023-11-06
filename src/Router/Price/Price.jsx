@@ -390,7 +390,7 @@ export default function Price() {
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
                             <input value={data_1?.code} onChange={(event)=>readInput_1(event,'code')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label className='fs-5- ff-monse-regular-'>Codigo tornillo</label>
+                            <label className='fs-5- ff-monse-regular-'>Codigo del producto</label>
                           </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
