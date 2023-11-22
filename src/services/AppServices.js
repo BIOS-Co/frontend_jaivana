@@ -40,4 +40,41 @@ const getProducts=async(data)=>{
 
 }
 
-export {getProducts}
+
+const getPrice=async(d,data,type)=>{
+    
+    /* PRODUCTS */
+    let path=environment.api+environment.precios
+
+    /* BODY */
+    // un producto
+    let body;
+    if (type =='product'){
+        body={
+            'Codigo_Tornillo':data.code,
+            'Descuento':data.descuento == '' || data.descuento == "" ? null : data.descuento,
+            'Pareto' : d.pareto,
+            'Nit' : data.nit,
+            'Umbral_Iteracciones': data.umbral,
+        }
+    }else{
+        body={
+            'grupo':data.code_group,
+            'subgrupo':data.code_Subgroup,
+            'Descuento':data.descuento == '' || data.descuento == "" ? null : data.descuento,
+            'Pareto' : d.pareto,
+            'Nit' : data.nit,
+            'Umbral_Iteracciones': data.umbral,
+        }
+    }
+    // familia 
+    
+    
+
+
+
+    return await axios.post(path,body)
+
+}
+
+export {getProducts,getPrice}

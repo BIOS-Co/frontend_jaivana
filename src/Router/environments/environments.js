@@ -8,6 +8,7 @@ export const environment = {
   api: server,
 
   // SERVICIOS
-  productos:'recomendar-productos'
+  productos:'recomendar-productos',
+  precios:'pricing'
 
 }

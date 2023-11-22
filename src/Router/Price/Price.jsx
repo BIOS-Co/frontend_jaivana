@@ -5,10 +5,9 @@ import Imagen_3 from '../../img/Fondo_2.jpg';
 import Swal from 'sweetalert2';
 import Preloader from '../../Components/Loading/Loading';
 /* FORM */
-
 import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
-
+import { getPrice } from '../../services/AppServices';
 const { NoOptionsMessage } = components;
 
 const customNoOptionsMessage = props => (
@@ -300,10 +299,14 @@ export default function Price() {
   }
 
   let [preloader,setPreloader] = React.useState(false);
-  let [inferencia,setInferencia] =React.useState(null);
+  let [inferencia_1,setInferencia_1] = React.useState(null);
+  let [inferencia_2,setInferencia_2] = React.useState(null);
+
 
   const doInference=async()=>{
 
+    setInferencia_1(null);
+    setInferencia_2(null);
     if(data.calculate === 'Precio de un producto'){
 
        if(data_1.code === "" || data_1.nit === "" || data_1.umbral === ""){
@@ -311,17 +314,39 @@ export default function Price() {
         Swal.fire({
           icon: 'info',
           text:"Los campos de código , nit y umbral son obligatorios.",
-         })
+        })
 
        }else{
-
-        setInferencia({'data':'nice'})
         setPreloader(true);
-        setTimeout(()=>{
-            setPreloader(false);
-        },1800)
+        let result =  undefined;
+        result =  await getPrice(data,data_1,'product').catch((error)=>{
+          console.log(error);
+          setPreloader(false);
+          Swal.fire({
+            icon: 'info',
+            text:"Problemas al generar la consulta",
+          })
+        })
 
-       }
+        if(result){
+          setPreloader(false);
+          console.log("resultados: ",result.data);
+          if(typeof result.data['output_precio'] === 'string'){
+            Swal.fire({
+              icon: 'info',
+              text: result.data['output_precio'],
+            })
+          }else{
+            Swal.fire({
+              icon: 'success',
+              text:"La consulta se hizo bajo la siguiente fecha: "+result.data['ultima_fecha_iterada'],
+            })
+            setInferencia_1(result.data['output_precio'])
+          }
+        }
+        
+
+      }
 
     }else{
 
@@ -334,11 +359,35 @@ export default function Price() {
 
        }else{
 
-        setInferencia({'data':'nice'})
         setPreloader(true);
-        setTimeout(()=>{
-            setPreloader(false);
-        },1800)
+        let result =  undefined;
+        result =  await getPrice(data,data_2,'products').catch((error)=>{
+          console.log(error);
+          setPreloader(false);
+          Swal.fire({
+            icon: 'info',
+            text:"Problemas al generar la consulta",
+          })
+        })
+
+        if(result){
+          setPreloader(false);
+          if(typeof result.data['output_precio'] === 'string'){
+            Swal.fire({
+              icon: 'info',
+              text: result.data['output_precio'],
+            })
+          }else{
+            Swal.fire({
+              icon: 'success',
+              text:"La consulta se hizo bajo la siguiente fecha: "+result.data['ultima_fecha_iterada'],
+            })
+            setInferencia_2(result.data['output_precio'])
+          }
+          
+          
+          
+        }
 
        }
       
@@ -473,228 +522,96 @@ export default function Price() {
                     </button>
                 </div>
           </div>
-          {inferencia !== null  ? 
+          {inferencia_1 !== null  ? 
           <>
           <p className='font description_' style={{marginTop:'20px'}}>Precio de un Producto</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>
                     <tr>
-                      <th scope="col" className='th-width-md-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Lista</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Precio de venta</span>
-                        </div>
-                      </th>
+                      {Object.keys(inferencia_1[0]).map((key,index)=>{
+                          return(
+                            <th key={index} scope="col" className='th-width-md-'>
+                              <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
+                                <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>{key}</span>
+                              </div>
+                            </th>
+                          )
+                      })}
+                      
                     </tr>
                   </thead>
                   <tbody>
+                    {inferencia_1.map((obj,index)=>{
+                      return(
+                        <tr key={index}>
+                          {Object.keys(obj).map((key,index_2)=>{
+                                return(
+                                  <td key={index_2} className='align-middle'>
+                                    <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj[key]}</p>
+                                  </td>
+                                )
+                          })}
+                        </tr>
+                      )
+                    })}
+                    
 
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >49000</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >laurel</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >30000</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >49000</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >laurel</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >30000</p>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
           </div>
+          
+          </>
+          :
+          <></>
+          }
+
+          {inferencia_2 !== null ? 
+          <>
           <p className='font description_' style={{marginTop:'20px'}}>Precios de todos los productos</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>
+                    
                     <tr>
-                      <th scope="col" className='th-width-md-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Código</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Nombre</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Código grupo</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Nombre grupo</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Código subgrupo</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Nombre subgrupo</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Peso</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Costo unitario</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Precio venta lista 1</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Precio venta lista 2</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Precio venta lista 3</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Precio venta lista 4</span>
-                        </div>
-                      </th>
-                      <th scope="col" className='th-width-sm-'>
-                        <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
-                          <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>Precio venta lista 5</span>
-                        </div>
-                      </th>
+                      
+                        {Object.keys(inferencia_2[0]).map((key,index)=>{
+                              return(
+                                <th key={index} scope="col" className='th-width-md-'>
+                                  <div className='d-flex flex-row justify-content-center align-items-center align-self-center w-100'>
+                                    <span className='fs-6- ff-monse-regular- fw-bold tx-dark-purple-'>{key}</span>
+                                  </div>
+                                </th>
+                              )
+                          })}
                     </tr>
                   </thead>
                   <tbody>
+                    {inferencia_2.map((obj,index)=>{
+                      return(
+                        <tr key={index}>
+                          {Object.keys(obj).map((key,index_2)=>{
+                                return(
+                                  <td key={index_2} className='align-middle'>
+                                    <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj[key]}</p>
+                                  </td>
+                                )
+                          })}
+                        </tr>
+                      )
+                    })}
+                    
 
-                  <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
           </div>
-          <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
+          {/* <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
                 <div className='col-auto'>
                     <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
                       <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>Descargar</span>
                     </button>
                 </div>
-          </div>
+          </div> */}
           </>
           :
           <></>
