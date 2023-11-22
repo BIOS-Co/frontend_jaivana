@@ -9,6 +9,7 @@ import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Swal from 'sweetalert2';
 import Preloader from '../../Components/Loading/Loading';
+import { getProducts } from '../../services/AppServices';
 
 const { NoOptionsMessage } = components;
 
@@ -287,7 +288,7 @@ export default function Products() {
 
   const AppendProduct=()=>{
 
-    if(data?.products.length===16){
+    if(data?.products.length===15){
 
       Swal.fire({
           icon: 'info',
@@ -334,6 +335,8 @@ export default function Products() {
 
   let [inferencia,setInferencia] = React.useState(null);
 
+  let [inferencia_1,setInferencia_1] = React.useState(null);
+  let [inferencia_2,setInferencia_2] = React.useState(null);
   const doInference=async()=>{
 
     /* INFERENCIA */
@@ -354,13 +357,56 @@ export default function Products() {
           icon: 'info',
           text:"Debe registrar el campo del nit",
         })
+        setInferencia('ok');
       }else{
         // LLAMAMOS EL SERVICIO AQUI.
-        setInferencia({'data':'nice'})
+        let result =  undefined;
         setPreloader(true);
-        setTimeout(()=>{
-            setPreloader(false);
-        },1800)
+        result = await getProducts(data).catch((error)=>{
+          setPreloader(false);
+          console.log(error);
+          Swal.fire({
+            icon: 'info',
+            text:"error al hacer inferencia",
+          })
+        })
+        if(result){
+          setPreloader(false);
+          console.log("INFERENCIA: ",result.data)
+          // MIRAMOS TODOS LOS CASOS POSIBLES
+          let inferencia1 = result.data[0] // obtenemos el objeto
+          let inferencia2 = result.data[1] // obtenemos el objeto
+          if (inferencia1[0]['Observacion'] !== undefined){
+
+            Swal.fire({
+              icon: 'info',
+              text:inferencia1[0]['Observacion'],
+            })
+
+          }else{
+
+            setInferencia_1(inferencia1)
+            
+          
+          }
+
+          if (inferencia2[0]['Observacion'] !== undefined){
+
+            Swal.fire({
+              icon: 'info',
+              text:inferencia2[0]['Observacion'],
+            })
+
+          
+          }else{
+
+            setInferencia_2(inferencia2)
+
+          }
+
+
+        }
+        
       }
 
     }
@@ -484,7 +530,7 @@ export default function Products() {
                 </div>
           </div>
           
-          {inferencia !== null ? 
+          {inferencia_1 !== null ? 
           <>
 
           
@@ -506,34 +552,36 @@ export default function Products() {
                     </tr>
                   </thead>
                   <tbody>
+                    
+                    {
+                        inferencia_1.map((obj,index)=>{
+                          <tr key={index}>
+                            <td className='align-middle'>
+                              <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj['Codigo Prepedido']}</p>
+                            </td>
+                            <td className='align-middle'>
+                              <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj['nombre articulo Prepedido']}</p>
+                            </td>
+                          </tr>
+                        })
+                    }
+                    
 
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
           </div>
+          </>
+          
+            
+          :
+          <></>
+          
+          
+          
+          }
+
+          {inferencia_2 !== null  ? 
+          <>
           <p className='font description_' style={{marginTop:'20px'}}>Recomendación de Productos Complementarios</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
@@ -551,50 +599,38 @@ export default function Products() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
 
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >203123</p>
-                      </td>
-                      <td className='align-middle'>
-                        <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >Cemento</p>
-                      </td>
-                    </tr>
+                  <tbody>
+                    
+                    
+                    {inferencia_2.map((obj,index)=>{
+                      return(
+                      <tr key={index}>
+                          <td className='align-middle'>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{obj['Codigo Prepedido']}</p>
+                          </td>
+                          <td className='align-middle'>
+                            <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center'>{obj['nombre articulo Prepedido']}</p>
+                          </td>
+                      </tr>
+                      )
+                    })}
+                    
+
                   </tbody>
                 </table>
           </div>
           <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
-                <div className='col-auto'>
+                {/* <div className='col-auto'>
                     <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
                       <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>Descargar</span>
                     </button>
-                </div>
+                </div> */}
           </div>
 
           </>
-            
           :
           <></>
-          
-          
-          
           }
           
         </form>
