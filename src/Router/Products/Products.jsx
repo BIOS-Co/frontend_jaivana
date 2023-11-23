@@ -341,6 +341,9 @@ export default function Products() {
 
     /* INFERENCIA */
 
+    setInferencia_1(null)
+    setInferencia_2(null)
+
     let check = checkProducts();
 
     if(check){
@@ -360,6 +363,7 @@ export default function Products() {
         setInferencia('ok');
       }else{
         // LLAMAMOS EL SERVICIO AQUI.
+        console.log(data)
         let result =  undefined;
         setPreloader(true);
         result = await getProducts(data).catch((error)=>{
@@ -534,7 +538,7 @@ export default function Products() {
           <>
 
           
-          <p className='font description_' style={{marginTop:'20px'}}>Recomendación de prepedido</p>
+          <p className='font description_' style={{marginTop:'20px'}}>Recomendación de Productos Complementarios</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>
@@ -555,14 +559,18 @@ export default function Products() {
                     
                     {
                         inferencia_1.map((obj,index)=>{
-                          <tr key={index}>
+                          return (
+                            <tr key={index}>
                             <td className='align-middle'>
-                              <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj['Codigo Prepedido']}</p>
+                              <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj['codigo']}</p>
                             </td>
                             <td className='align-middle'>
-                              <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj['nombre articulo Prepedido']}</p>
+                              <p className='m-0 lh-sm fs-5- ff-monse-regular- fw-normal text-center' >{obj['nombre articulo']}</p>
                             </td>
                           </tr>
+
+                          )
+                          
                         })
                     }
                     
@@ -582,7 +590,7 @@ export default function Products() {
 
           {inferencia_2 !== null  ? 
           <>
-          <p className='font description_' style={{marginTop:'20px'}}>Recomendación de Productos Complementarios</p>
+          <p className='font description_' style={{marginTop:'20px'}}>Recomendación de prepedido</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>

@@ -9,33 +9,33 @@ const getProducts=async(data)=>{
     /* BODY */
 
     let body={
-        "nit_del_cliente": "3024201920",
-        "departamento": "",
-        "ciiu": "",
-        "seccion":"",
-        "producto_1": "",
-        "producto_2": "",
-        "producto_3": "",
-        "producto_4": "",
-        "producto_5": "",
-        "producto_6": "",
-        "producto_7": "",
-        "producto_8": "",
-        "producto_9": "",
-        "producto_10":"",
-        "producto_11": "",
-        "producto_12": "",
-        "producto_13": "",
-        "producto_14": "",
-        "producto_15": ""
+        "nit_del_cliente": data.Nit,
+        "departamento": data.Departamento == "" ||  data.Departamento == '' ?  null : data.Departamento,
+        "ciiu":  data.Ciuu == "" ||  data.Ciuu == '' ?  null : data.Ciuu,
+        "seccion":data.client_section == "" ||  data.client_section == '' ?  null : data.client_section,
+        "producto_1": null,
+        "producto_2": null,
+        "producto_3": null,
+        "producto_4": null,
+        "producto_5": null,
+        "producto_6": null,
+        "producto_7": null,
+        "producto_8": null,
+        "producto_9": null,
+        "producto_10":null,
+        "producto_11": null,
+        "producto_12": null,
+        "producto_13": null,
+        "producto_14": null,
+        "producto_15": null
     }
-    for (var i; i<data.products.length;i++){
+    for (var i=0; i<data.products.length;i++){
         let string = 'producto_'+(i+1).toString()
-        body[string] = data.products[i];
+        body[string] = data.products[i].code;
     }
 
     console.log("LO QUE SE ENVIA: ",body);
-
+    body= eliminarNulos(body)
     return await axios.post(path,body)
 
 }
@@ -51,11 +51,14 @@ const getPrice=async(d,data,type)=>{
     let body;
     if (type =='product'){
         body={
+            "opcion_seleccionada": d.calculate,
+            "opcion_seleccionada_tipo_iteraccion": d.iterate,
             'Codigo_Tornillo':data.code,
             'Descuento':data.descuento == '' || data.descuento == "" ? null : data.descuento,
             'Pareto' : d.pareto,
             'Nit' : data.nit,
             'Umbral_Iteracciones': data.umbral,
+
         }
     }else{
         body={
@@ -65,16 +68,29 @@ const getPrice=async(d,data,type)=>{
             'Pareto' : d.pareto,
             'Nit' : data.nit,
             'Umbral_Iteracciones': data.umbral,
+            "opcion_seleccionada": d.calculate,
+            "opcion_seleccionada_tipo_iteraccion": d.iterate
         }
     }
     // familia 
     
     
 
-
-
+    body= eliminarNulos(body)
+    console.log(body);
     return await axios.post(path,body)
 
+}
+
+function eliminarNulos(objeto) {
+    for (let clave in objeto) {
+      if (objeto[clave] === null) {
+        delete objeto[clave];
+      } else if (typeof objeto[clave] === 'object') {
+        eliminarNulos(objeto[clave]);
+      }
+    }
+    return objeto;
 }
 
 export {getProducts,getPrice}

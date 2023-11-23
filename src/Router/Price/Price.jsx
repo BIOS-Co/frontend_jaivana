@@ -307,7 +307,7 @@ export default function Price() {
 
     setInferencia_1(null);
     setInferencia_2(null);
-    if(data.calculate === 'Precio de un producto'){
+    if(data.calculate === 'Precio de un Producto'){
 
        if(data_1.code === "" || data_1.nit === "" || data_1.umbral === ""){
 
@@ -415,12 +415,12 @@ export default function Price() {
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
-                      <Select options={[{value:"Precio de un producto",label:"Precio de un producto"},{value:"Precios de todos los productos",label:"Precios de todos los productos"}]} value={{value:data?.calculate,label:data?.calculate}} onChange={(event)=>readSelect(event,'calculate')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Qué desea Calcular?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                      <Select options={[{value:"Precio de un Producto",label:"Precio de un producto"},{value:"Precios de todos los productos pertenecientes a un grupo y subgrupo",label:"Precios de todos los productos"}]} value={{value:data?.calculate,label:data?.calculate}} onChange={(event)=>readSelect(event,'calculate')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Qué desea Calcular?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
-                    <Select options={[{value:"Iterar por Historial Proveedor ",label:"Iterar por Historial Proveedor "},{value:"Iterar por Historial Producto/Familia",label:"Iterar por Historial Producto/Familia"}]} value={{value:data?.iterate,label:data?.iterate}} onChange={(event)=>readSelect(event,'iterate')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Cómo Desea Iterar?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                    <Select options={[{value:"Iterar por Historial Proveedor",label:"Iterar por Historial Proveedor "},{value:"Iterar por Historial Producto o Familia",label:"Iterar por Historial Producto/Familia"}]} value={{value:data?.iterate,label:data?.iterate}} onChange={(event)=>readSelect(event,'iterate')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Cómo Desea Iterar?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
           </div>
@@ -434,7 +434,7 @@ export default function Price() {
 
           {data?.calculate !== "" && data?.iterate !== "" && data?.pareto !== "" ? 
           <>
-          {data?.calculate==='Precio de un producto' ? 
+          {data?.calculate==='Precio de un Producto' ? 
           <>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
