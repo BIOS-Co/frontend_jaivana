@@ -250,6 +250,7 @@ export default function Price() {
     'calculate':"",
     'iterate':"",
     'pareto':"",
+    'tipo_calculo':"",
   })
 
   let [data_1,setData_1] = React.useState({
@@ -430,9 +431,14 @@ export default function Price() {
                       <Select options={[{value:"Pareto",label:"Pareto"},{value:"No pareto",label:"No pareto"}]} value={{value:data?.pareto,label:data?.pareto}} onChange={(event)=>readSelect(event,'pareto')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Producto pareto?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
                     </div>
               </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                    <div className='form-floating inner-addon- left-addon-'>
+                      <Select options={[{value:"Calcular a partir de ultimas importaciones",label:"Calcular a partir de ultimas importaciones"},{value:"Calcular a partir de ultimos pedidos",label:"Calcular a partir de ultimos pedidos"}]} value={{value:data?.tipo_calculo,label:data?.tipo_calculo}} onChange={(event)=>readSelect(event,'tipo_calculo')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Tipo de cálculo?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
+                    </div>
+              </div>
           </div>
 
-          {data?.calculate !== "" && data?.iterate !== "" && data?.pareto !== "" ? 
+          {data?.calculate !== "" && data?.iterate !== "" && data?.pareto !== "" && data?.tipo_calculo !== "" ? 
           <>
           {data?.calculate==='Precio de un Producto' ? 
           <>

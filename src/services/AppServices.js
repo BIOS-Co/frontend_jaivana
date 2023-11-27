@@ -57,6 +57,7 @@ const getPrice=async(d,data,type)=>{
             'Descuento':data.descuento == '' || data.descuento == "" ? null : data.descuento,
             'Pareto' : d.pareto,
             'Nit' : data.nit,
+            'tipo_calculo':d.tipo_calculo,
             'Umbral_Iteracciones': data.umbral,
 
         }
@@ -67,6 +68,7 @@ const getPrice=async(d,data,type)=>{
             'Descuento':data.descuento == '' || data.descuento == "" ? null : data.descuento,
             'Pareto' : d.pareto,
             'Nit' : data.nit,
+            'tipo_calculo':d.tipo_calculo,
             'Umbral_Iteracciones': data.umbral,
             "opcion_seleccionada": d.calculate,
             "opcion_seleccionada_tipo_iteraccion": d.iterate
