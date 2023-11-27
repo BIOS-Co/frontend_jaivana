@@ -16,32 +16,27 @@ Para instalar el software, abra su interfaz de línea de comandos preferida y si
 Clone el repositorio en la máquina en la cual vaya a hacer el despliegue
 
 ```
-$ git clone https://github.com/BIOS-Co/Backend_Jaivana.git
+$ git clone https://github.com/BIOS-Co/frontend_jaivana.git
 ```
 
 Acceda al directorio del proyecto con el siguiente comando:
 
 ```
-$ cd Backend_Jaivana
+$ cd frontend_jaivana
 ```
 
-Cree un entorno virtual:
+Instale las dependencias del proyecto:
 
 ```
-$ python3 -m venv venv
+$ npm i
 ```
 
-Active el entorno virtual:
+Inicialize el proyecto:
 
 ```
-$ source venv/bin/activate
+$ npm start
 ```
 
-Instale los requerimientos:
-
-```
-$ pip install -r requirements.txt
-```
 
 Lance el servicio:
 
