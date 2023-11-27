@@ -567,11 +567,24 @@
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'nova';
+    src: url('./fonts/nova_2.otf') format('opentype');
+  }
 
-  .font {
-    font-family: 'Bold', sans-serif;
+  @font-face {
+    font-family: 'beauty';
+    src: url('./fonts/beauty.otf') format('opentype');
+  }
+
+  .nova{
+    font-family: 'nova', sans-serif !important;
+  }
+  .font{
+    font-family: 'beauty', sans-serif !important;
     /* Utiliza la fuente personalizada y, si no está disponible, usa una fuente genérica como respaldo */
   }
+
 
   [class^="icon-"],
 [class*=" icon-"] {

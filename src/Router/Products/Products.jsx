@@ -432,12 +432,12 @@ export default function Products() {
       
       <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover','display':'flex','flexDirection':'column'}}>
          
-          <p className='font title width-title'  style={{color:'white'}}>Sistema de recomendación de productos</p>
+          <p className='title width-title nova'  style={{color:'white'}}>Sistema de recomendación de productos</p>
           <div class="icon-scroll" style={{position:'relative'}}></div>
       </div>
       
-      <div className='FormularioBody font'>
-        <p className='font description_'>Registra el siguiente formulario para realizar la inferencia</p>
+      <div className='FormularioBody nova'>
+        <p className='nova description_'>Registra el siguiente formulario para realizar la inferencia</p>
         <form className='formulario'>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>

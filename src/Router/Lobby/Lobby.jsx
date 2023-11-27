@@ -35,14 +35,14 @@ export default function Lobby() {
     <div className='body'>
         <Navigationbar ></Navigationbar>
         <div className='carouselBody font' style={{backgroundImage: `url(${Fondo})`,backgroundSize:'cover'}}>
-            <p className='font title ' id='dropdown-basic'>¿Que deseas realizar?</p>
-            <p className='font description'>Selecciona una de las dos opciones para hacer inferencia, en el cual puedes encontrar nuestro sistema de recomendación de productos o fijación de precios</p>
+            <p className='title nova' id='dropdown-basic'>¿Que deseas realizar?</p>
+            <p className='description nova'>Selecciona una de las dos opciones para hacer inferencia, en el cual puedes encontrar nuestro sistema de recomendación de productos o fijación de precios</p>
             <div className='cardsContainer'>
                 <div className='card' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover',opacity:1}}>
-                    <button onClick={()=>redirect('products')} className='textCard' style={{position:'relative',bottom:'12px'}}>Productos</button>
+                    <button onClick={()=>redirect('products')} className='textCard nova' style={{position:'relative',bottom:'12px'}}>Productos</button>
                 </div>
                 <div className='card' style={{backgroundImage: `url(${Imagen_2})`,backgroundSize:'cover',opacity:1}}>
-                    <button onClick={()=>redirect('price')} className='textCard' style={{position:'relative',bottom:'12px'}}>Precios</button>
+                    <button onClick={()=>redirect('price')} className='textCard nova' style={{position:'relative',bottom:'12px'}}>Precios</button>
                 </div>
             </div>
         </div>

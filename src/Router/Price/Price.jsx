@@ -405,12 +405,12 @@ export default function Price() {
           <></>
       }
       <Navigationbar></Navigationbar>
-      <div className='carouselBody_ font' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover','display':'flex','flexDirection':'column'}}>
-          <p className='font title ' style={{color:'white'}}>Sistema de fijación de precios</p>
+      <div className='carouselBody_ nova' style={{backgroundImage: `url(${Imagen_3})`,backgroundSize:'cover','display':'flex','flexDirection':'column'}}>
+          <p className='nova title ' style={{color:'white'}}>Sistema de fijación de precios</p>
           <div class="icon-scroll" style={{position:'relative'}}></div>
       </div>
-      <div className='FormularioBody font'>
-        <p className='font description_'>Registra el siguiente formulario para realizar la inferencia</p>
+      <div className='FormularioBody nova'>
+        <p className='nova description_'>Registra el siguiente formulario para realizar la inferencia</p>
         <form className='formulario'>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
@@ -524,7 +524,7 @@ export default function Price() {
           </div>
           {inferencia_1 !== null  ? 
           <>
-          <p className='font description_' style={{marginTop:'20px'}}>Precio de un Producto</p>
+          <p className='nova description_' style={{marginTop:'20px'}}>Precio de un Producto</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>
@@ -568,7 +568,7 @@ export default function Price() {
 
           {inferencia_2 !== null ? 
           <>
-          <p className='font description_' style={{marginTop:'20px'}}>Precios de todos los productos</p>
+          <p className='nova description_' style={{marginTop:'20px'}}>Precios de todos los productos</p>
           <div className='table-responsive table-general-' style={{marginTop:'30px'}}>
                 <table className='table table-sm table-striped table-no-border- align-middle'>
                   <thead>
