@@ -528,6 +528,19 @@ export default function Price() {
                     </button>
                 </div>
           </div>
+          {inferencia_1 !== null || inferencia_2 !== null ? 
+          
+          <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
+                <div className='col-auto'>
+                    <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
+                      <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>Descargar</span>
+                    </button>
+                </div>
+          </div>
+          :
+          <></>
+          }
+          
           {inferencia_1 !== null  ? 
           <>
           <p className='nova description_' style={{marginTop:'20px'}}>Precio de un Producto</p>
@@ -611,13 +624,7 @@ export default function Price() {
                   </tbody>
                 </table>
           </div>
-          {/* <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
-                <div className='col-auto'>
-                    <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
-                      <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>Descargar</span>
-                    </button>
-                </div>
-          </div> */}
+          
           </>
           :
           <></>
