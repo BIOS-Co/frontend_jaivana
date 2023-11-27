@@ -7,6 +7,7 @@ import Preloader from '../../Components/Loading/Loading';
 /* FORM */
 import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
+import response from '../../Data/response.json';
 import { getPrice } from '../../services/AppServices';
 const { NoOptionsMessage } = components;
 
@@ -302,8 +303,8 @@ export default function Price() {
   let [preloader,setPreloader] = React.useState(false);
   let [inferencia_1,setInferencia_1] = React.useState(null);
   let [inferencia_2,setInferencia_2] = React.useState(null);
-
-
+  let [file,setFile] = React.useState(null);
+  
   const doInference=async()=>{
 
     setInferencia_1(null);
@@ -342,6 +343,7 @@ export default function Price() {
               icon: 'success',
               text:"La consulta se hizo bajo la siguiente fecha: "+result.data['ultima_fecha_iterada'],
             })
+            setFile(result.data['csv'])
             setInferencia_1(result.data['output_precio'])
           }
         }
@@ -383,6 +385,7 @@ export default function Price() {
               icon: 'success',
               text:"La consulta se hizo bajo la siguiente fecha: "+result.data['ultima_fecha_iterada'],
             })
+            setFile(result.data['csv'])
             setInferencia_2(result.data['output_precio'])
           }
           
@@ -393,6 +396,16 @@ export default function Price() {
        }
       
     }
+
+  }
+
+  const dowloadfile = () =>{
+
+    const blob = new Blob([file], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "archivo.csv";
+    link.click();
 
   }
 
@@ -530,7 +543,7 @@ export default function Price() {
           </div>
           {inferencia_1 !== null || inferencia_2 !== null ? 
           
-          <div className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
+          <div onClick={dowloadfile} className='row gx-2 d-flex flex-row justify-content-end align-items-start align-self-start mt-5'>
                 <div className='col-auto'>
                     <button  className='buttonProduct btn btn-dark-purple- rounded-pill ps-5 pe-5 d-flex flex-row justify-content-center align-items-center align-self-center h-45-' type="button" >
                       <span className='lh-1 fs-6- ff-monse-regular- fw-semibold'>Descargar</span>
