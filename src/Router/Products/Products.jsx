@@ -385,28 +385,46 @@ export default function Products() {
             Swal.fire({
               icon: 'info',
               text:inferencia1[0]['Observacion'],
-            })
+            }).then(result => {
+              if (result.isConfirmed) {
+                // miramos la otra alerta
+                if (inferencia2[0]['Observacion'] !== undefined){
+
+                  Swal.fire({
+                    icon: 'info',
+                    text:inferencia2[0]['Observacion'],
+                  })
+      
+                
+                }else{
+      
+                  setInferencia_2(inferencia2)
+      
+                }
+              }
+            });
 
           }else{
 
             setInferencia_1(inferencia1)
+            // miramos la otra alerta
+            if (inferencia2[0]['Observacion'] !== undefined){
+
+              Swal.fire({
+                icon: 'info',
+                text:inferencia2[0]['Observacion'],
+              })
+  
             
+            }else{
+  
+              setInferencia_2(inferencia2)
+  
+            }
           
           }
 
-          if (inferencia2[0]['Observacion'] !== undefined){
-
-            Swal.fire({
-              icon: 'info',
-              text:inferencia2[0]['Observacion'],
-            })
-
           
-          }else{
-
-            setInferencia_2(inferencia2)
-
-          }
 
 
         }
