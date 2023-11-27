@@ -31,16 +31,10 @@ Instale las dependencias del proyecto:
 $ npm i
 ```
 
-Inicialize el proyecto:
+Lanze el servicio:
 
 ```
 $ npm start
 ```
 
-
-Lance el servicio:
-
-```
-$ uvicorn main:app --reload --port 8080
-```
 
