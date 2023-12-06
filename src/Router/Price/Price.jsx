@@ -250,13 +250,17 @@ export default function Price() {
   let [data,setData] = React.useState({
     'calculate':"",
     'iterate':"",
-    'pareto':"",
     'tipo_calculo':"",
   })
 
   let [data_1,setData_1] = React.useState({
     'code':'',
-    'descuento':'',
+    'Descuento_Inicial':'',
+    'Descuento_1':'',
+    'Descuento_2':'',
+    'Descuento_3':'',
+    'Descuento_4':'',
+    'Descuento_5':'',
     'nit':'',
     'umbral':''
   })
@@ -264,7 +268,12 @@ export default function Price() {
   let [data_2,setData_2] = React.useState({
     'code_group':'',
     'code_Subgroup':'',
-    'descuento':'',
+    'Descuento_Inicial':'',
+    'Descuento_1':'',
+    'Descuento_2':'',
+    'Descuento_3':'',
+    'Descuento_4':'',
+    'Descuento_5':'',
     'nit':'',
     'umbral':''
   })
@@ -357,7 +366,7 @@ export default function Price() {
 
         Swal.fire({
           icon: 'info',
-          text:"Solo el campo de descuento no es obligatorio.",
+          text:"Solo los campos de descuentos no son obligatorios.",
          })
 
        }else{
@@ -439,11 +448,7 @@ export default function Price() {
               </div>
           </div>
           <div style={{marginBottom:'100px'}} className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
-                    <div className='form-floating inner-addon- left-addon-'>
-                      <Select options={[{value:"Pareto",label:"Pareto"},{value:"No pareto",label:"No pareto"}]} value={{value:data?.pareto,label:data?.pareto}} onChange={(event)=>readSelect(event,'pareto')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Producto pareto?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
-                    </div>
-              </div>
+              
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                     <div className='form-floating inner-addon- left-addon-'>
                       <Select options={[{value:"Calcular a partir de ultimas importaciones",label:"Calcular a partir de ultimas importaciones"},{value:"Calcular a partir de ultimos pedidos",label:"Calcular a partir de ultimos pedidos"}]} value={{value:data?.tipo_calculo,label:data?.tipo_calculo}} onChange={(event)=>readSelect(event,'tipo_calculo')} components={{ ValueContainer: CustomValueContainer, animatedComponents, NoOptionsMessage: customNoOptionsMessage, LoadingMessage: customLoadingMessage }} placeholder="¿Tipo de cálculo?" styles={selectStyles} isClearable={true} name='typeIdentification'/>
@@ -451,7 +456,7 @@ export default function Price() {
               </div>
           </div>
 
-          {data?.calculate !== "" && data?.iterate !== "" && data?.pareto !== "" && data?.tipo_calculo !== "" ? 
+          {data?.calculate !== "" && data?.iterate !== "" && data?.tipo_calculo !== "" ? 
           <>
           {data?.calculate==='Precio de un Producto' ? 
           <>
@@ -478,13 +483,50 @@ export default function Price() {
                             <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Nit proveedor</label>
                           </div>
               </div>
-              
               <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input value={data_1?.descuento} onChange={(event)=>readInput_1(event,'descuento')}  type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento</label>
+                            <input value={data_1?.Descuento_Inicial} onChange={(event)=>readInput_1(event,'Descuento_Inicial')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento inicial</label>
                           </div>
               </div>
+              
+              
+          </div>
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+            <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                              <input value={data_1?.Descuento_1} onChange={(event)=>readInput_1(event,'Descuento_1')}  type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                              <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 1</label>
+                            </div>
+            </div>
+            <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                              <input value={data_1?.Descuento_2} onChange={(event)=>readInput_1(event,'Descuento_2')}  type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                              <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 2</label>
+                            </div>
+            </div>
+          </div>
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+            <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                              <input value={data_1?.Descuento_3} onChange={(event)=>readInput_1(event,'Descuento_3')}  type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                              <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 3</label>
+                            </div>
+            </div>
+            <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                              <input value={data_1?.Descuento_4} onChange={(event)=>readInput_1(event,'Descuento_4')}  type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                              <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 4</label>
+                            </div>
+            </div>
+          </div>
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+            <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                            <div className='form-floating inner-addon- left-addon-'>
+                              <input value={data_1?.Descuento_5} onChange={(event)=>readInput_1(event,'Descuento_5')}  type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                              <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 5</label>
+                            </div>
+            </div>
           </div>
           </>
           :
@@ -520,12 +562,49 @@ export default function Price() {
               </div>
           </div>
           <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
-          <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
                           <div className='form-floating inner-addon- left-addon-'>
-                            <input value={data_2?.descuento} onChange={(event)=>readInput_2(event,'descuento')} type="text" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
-                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento</label>
+                            <input value={data_2?.Descuento_Inicial} onChange={(event)=>readInput_2(event,'Descuento_Inicial')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento inicial</label>
                           </div>
               </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_2?.Descuento_1} onChange={(event)=>readInput_2(event,'Descuento_1')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 1</label>
+                          </div>
+              </div>
+              
+          </div>
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_2?.Descuento_2} onChange={(event)=>readInput_2(event,'Descuento_2')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 2</label>
+                          </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_2?.Descuento_3} onChange={(event)=>readInput_2(event,'Descuento_3')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 3</label>
+                          </div>
+              </div>
+              
+          </div>
+          <div className='row gx-0 gx-sm-0 gx-md-4 gx-lg-4 gx-xl-4 gx-xxl-5'>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_2?.Descuento_4} onChange={(event)=>readInput_2(event,'Descuento_4')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 4</label>
+                          </div>
+              </div>
+              <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-3 mb-xxl-3'>
+                          <div className='form-floating inner-addon- left-addon-'>
+                            <input value={data_2?.Descuento_5} onChange={(event)=>readInput_2(event,'Descuento_5')} type="number" className='form-control' id='identificationNumber' placeholder="Número de identificación" name='identification' />
+                            <label style={{color:'#d2d5d8'}} className='fs-5- ff-monse-regular-'>Descuento 5</label>
+                          </div>
+              </div>
+              
           </div>
           </>
           }
